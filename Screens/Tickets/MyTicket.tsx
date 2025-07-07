@@ -69,14 +69,14 @@ const MyTicketsPage: React.FC = () => {
   ];
 
   const quickActions: QuickAction[] = [
-    {
-      id: 1,
-      title: 'Show Ticket QR',
-      icon: 'qr-code',
-      iconColor: '#FFFFFF',
-      backgroundColor: '#8B5CF6',
-      action: 'qr',
-    },
+    // {
+    //   id: 1,
+    //   title: 'Show Ticket QR',
+    //   icon: 'qr-code',
+    //   iconColor: '#FFFFFF',
+    //   backgroundColor: '#8B5CF6',
+    //   action: 'qr',
+    // },
     {
       id: 2,
       title: 'Book New Trip',
@@ -93,14 +93,14 @@ const MyTicketsPage: React.FC = () => {
       backgroundColor: '#EF4444',
       action: 'cancel',
     },
-    {
-      id: 4,
-      title: 'Modify Trip',
-      icon: 'swap-horizontal',
-      iconColor: '#FFFFFF',
-      backgroundColor: '#F97316',
-      action: 'modify',
-    },
+    // {
+    //   id: 4,
+    //   title: 'Modify Trip',
+    //   icon: 'swap-horizontal',
+    //   iconColor: '#FFFFFF',
+    //   backgroundColor: '#F97316',
+    //   action: 'modify',
+    // },
   ];
 
   const handleTripAction = (trip: Trip) => {
