@@ -30,8 +30,7 @@ const Badge = ({ count, color = '#AD112A' }) => {
         style={{
           color: '#FFFFFF',
           fontSize: 12,
-
-          fontFamily: 'Nunito-SemiBold',
+          fontFamily: 'Raleway-Medium',
         }}
       >
         {count > 99 ? '99+' : count}
@@ -52,17 +51,17 @@ const IconWithBadge = ({ children, badgeCount, badgeColor }) => {
 
 export default function TabLayout() {
   
-  const cartItemCount = 3; // Replace with your cart item count
+  const ticketCount = 3; // Replace with your ticket count
   const orderNotificationCount = 2; // Replace with your order notification count
 
   return (
     <Tabs
       screenOptions={({ route }) => ({
         headerShown: false,
-        tabBarActiveTintColor: '#064E3B',
-        tabBarInactiveTintColor: '#8E8E93', // Gray color for inactive tabs
+        tabBarActiveTintColor: '#6366F1',
+        tabBarInactiveTintColor: '#8E8E93', 
         tabBarLabelStyle: {
-          fontFamily: 'Nunito-SemiBold',
+          fontFamily: 'Raleway-Medium',
           fontSize: 11,
         },
         tabBarStyle: Platform.select({
@@ -108,24 +107,24 @@ export default function TabLayout() {
 
           switch (route.name) {
             case 'index':
-              iconName = focused ? 'home' : 'home-outline';
+              iconName = focused ? 'home-sharp' : 'home-outline';
               break;
             case 'cart':
-              iconName = focused ? 'cart' : 'cart-outline';
-              badgeCount = cartItemCount;
+              iconName = focused ? 'search' : 'search-outline';
               break;
             case 'category':
-              iconName = focused ? 'grid' : 'grid-outline';
+              iconName = focused ? 'receipt' : 'receipt-outline';
+              badgeCount = ticketCount;
               break;
             case 'order':
-              iconName = focused ? 'bag' : 'bag-outline';
+              iconName = focused ? 'gift' : 'gift-outline';
               badgeCount = orderNotificationCount;
               break;
             case 'consult':
               iconName = focused ? 'chatbubble' : 'chatbubble-outline';
               break;
-            case 'settings':
-              iconName = focused ? 'settings' : 'settings-outline';
+            case 'profile':
+              iconName = focused ? 'person-circle' : 'person-circle-outline';
               break;
             default:
               iconName = 'ellipse';
@@ -133,7 +132,7 @@ export default function TabLayout() {
 
           const icon = <Ionicons name={iconName} size={20} color={color} />;
 
-          if (route.name === 'cart' || route.name === 'order') {
+          if (route.name === 'category' || route.name === 'order') {
             return (
               <IconWithBadge badgeCount={badgeCount} badgeColor={badgeColor}>
                 {icon}
@@ -154,29 +153,24 @@ export default function TabLayout() {
       <Tabs.Screen
         name="cart"
         options={{
-          title: 'Cart',
+          title: 'search',
         }}
       />
       <Tabs.Screen
         name="category"
         options={{
-          title: 'Categories',
+          title: 'My Tickets',
         }}
       />
       <Tabs.Screen
         name="order"
         options={{
-          title: 'Orders',
+          title: 'Offers',
         }}
       />
+   
       <Tabs.Screen
-        name="consult"
-        options={{
-          title: 'Consult',
-        }}
-      />
-      <Tabs.Screen
-        name="settings"
+        name="profile"
         options={{
           title: 'Profile',
         }}
