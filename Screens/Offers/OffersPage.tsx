@@ -138,7 +138,7 @@ const OffersPage: React.FC = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="light-content" backgroundColor="#6366F1" />
+      <StatusBar barStyle="light-content" backgroundColor="#6366F1"  />
       
       {/* Header */}
       <LinearGradient
@@ -280,7 +280,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 20,
     paddingVertical: 16,
-    paddingTop: 40,
+    paddingTop: 20,
   },
   backButton: {
     padding: 8,
