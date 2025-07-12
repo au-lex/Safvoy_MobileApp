@@ -1,18 +1,23 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import Header from '@/Screens/Home/Header'
-import { StatusBar } from 'expo-status-bar'
-import { SafeAreaView } from 'react-native-safe-area-context'
+
 import Hero from '@/Screens/Home/Hero'
+import SafeLayout from '@/Layout/Layout'
 
 const Index = () => {
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+
+    <SafeLayout>
 
 
-      <Header />
-<Hero />
-    </SafeAreaView>
+      <View style={{ flex: 1 }}>
+
+
+        <Header />
+        <Hero />
+      </View>
+    </SafeLayout>
   )
 }
 

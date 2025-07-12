@@ -12,8 +12,12 @@ import {
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
+import { Image } from 'react-native';
+import BannerSlider from './HeroSlider';
+import { useRoute } from '@react-navigation/native';
+import { useRouter } from 'expo-router';
 
-const { width } = Dimensions.get('window');
+
 
 interface PopularRoute {
   id: string;
@@ -25,12 +29,7 @@ interface PopularRoute {
   backgroundImage: string;
 }
 
-interface RecentSearch {
-  id: string;
-  from: string;
-  to: string;
-  date: string;
-}
+
 
 interface SpecialOffer {
   id: string;
@@ -42,32 +41,9 @@ interface SpecialOffer {
 }
 
 const Hero: React.FC = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const flatListRef = useRef<FlatList>(null);
 
-  const heroSlides = [
-    {
-      id: '1',
-      title: 'Popular Routes',
-      subtitle: 'Discover amazing destinations',
-      gradient: ['rgba(102, 126, 234, 0.8)', 'rgba(118, 75, 162, 0.8)'],
-      image: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80',
-    },
-    {
-      id: '2',
-      title: 'Best Deals',
-      subtitle: 'Save up to 50% on trips',
-      gradient: ['rgba(240, 147, 251, 0.8)', 'rgba(245, 87, 108, 0.8)'],
-      image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80',
-    },
-    {
-      id: '3',
-      title: 'Weekend Getaways',
-      subtitle: 'Perfect for short trips',
-      gradient: ['rgba(79, 172, 254, 0.8)', 'rgba(0, 242, 254, 0.8)'],
-      image: 'https://images.unsplash.com/photo-1502780402662-acc01917949e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-    },
-  ];
+  const router =useRouter();
+ 
 
   const popularRoutes: PopularRoute[] = [
     {
@@ -99,20 +75,7 @@ const Hero: React.FC = () => {
     },
   ];
 
-  const recentSearches: RecentSearch[] = [
-    {
-      id: '1',
-      from: 'NYC',
-      to: 'Boston',
-      date: 'Apr 15, 2025',
-    },
-    {
-      id: '2',
-      from: 'DC',
-      to: 'Philly',
-      date: 'Apr 10, 2025',
-    },
-  ];
+
 
   const specialOffers: SpecialOffer[] = [
     {
@@ -121,28 +84,26 @@ const Hero: React.FC = () => {
       description: '20% off on all weekend trips',
       discount: '20% OFF',
       validUntil: 'Valid until Apr 30',
-      icon: 'calendar-outline',
+      icon: 'https://res.cloudinary.com/dmhvsyzch/image/upload/v1752358668/gift_ijdagv.png',
     },
+    {
+      id: '2',
+      title: 'Weekend Special',
+      description: '20% off on all weekend trips',
+      discount: '20% OFF',
+      validUntil: 'Valid until Apr 30',
+      icon: 'https://res.cloudinary.com/dmhvsyzch/image/upload/v1752358664/special-offer_oorbku.png',
+    },
+
+    
   ];
 
-  const renderHeroSlide = ({ item, index }: { item: any; index: number }) => (
-    <ImageBackground
-      source={{ uri: item.image }}
-      style={[styles.heroSlide, { width }]}
-      resizeMode="cover"
-    >
-      <View style={styles.heroOverlay}>
-        <Text style={styles.heroTitle}>{item.title}</Text>
-        <Text style={styles.heroSubtitle}>{item.subtitle}</Text>
-      </View>
-    </ImageBackground>
-  );
-
   const renderPopularRoute = ({ item }: { item: PopularRoute }) => (
-    <TouchableOpacity style={styles.routeCard}>
+    <TouchableOpacity onPress={() => router.push('/busListing/BusListing')} style={styles.routeCard}>
       <ImageBackground
         source={{ uri: item.backgroundImage }}
         style={styles.routeBackground}
+        
         resizeMode="cover"
       >
         <LinearGradient
@@ -186,30 +147,14 @@ const Hero: React.FC = () => {
     </TouchableOpacity>
   );
 
-  const renderRecentSearch = ({ item }: { item: RecentSearch }) => (
-    <TouchableOpacity style={styles.searchCard}>
-      <View style={styles.searchContent}>
-        <View style={styles.searchRoute}>
-          <Text style={styles.searchFrom}>{item.from}</Text>
-          <Ionicons name="arrow-forward" size={16} color="#4facfe" />
-          <Text style={styles.searchTo}>{item.to}</Text>
-        </View>
-        <View style={styles.searchDate}>
-          <Ionicons name="calendar-outline" size={16} color="#999" />
-          <Text style={styles.searchDateText}>{item.date}</Text>
-        </View>
-      </View>
-      <TouchableOpacity style={styles.searchButton}>
-        <Ionicons name="search" size={20} color="#667eea" />
-      </TouchableOpacity>
-    </TouchableOpacity>
-  );
+
 
   const renderSpecialOffer = ({ item }: { item: SpecialOffer }) => (
     <View style={styles.offerCard}>
       <View style={styles.offerContent}>
         <View style={styles.offerIcon}>
-          <Ionicons name={item.icon as any} size={24} color="#667eea" />
+          <Image
+           source={{ uri: item.icon }} style={{width:30, height: 30}} />
         </View>
         <View style={styles.offerText}>
           <Text style={styles.offerTitle}>{item.title}</Text>
@@ -226,16 +171,13 @@ const Hero: React.FC = () => {
     </View>
   );
 
-  const onSlideChange = (event: any) => {
-    const slideIndex = Math.round(event.nativeEvent.contentOffset.x / width);
-    setCurrentSlide(slideIndex);
-  };
+
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
         {/* Hero Slider */}
-        <View style={styles.heroContainer}>
+        {/* <View style={styles.heroContainer}>
           <FlatList
             ref={flatListRef}
             data={heroSlides}
@@ -257,7 +199,9 @@ const Hero: React.FC = () => {
               />
             ))}
           </View>
-        </View>
+        </View> */}
+
+        <BannerSlider />
 
         {/* Special Offers */}
         <View style={styles.section}>
@@ -289,23 +233,10 @@ const Hero: React.FC = () => {
           />
         </View>
 
-        {/* Recent Searches */}
-        <View style={styles.section}>
-          <View style={styles.sectionHeader}>
-            <View style={styles.sectionIndicator} />
-            <Text style={styles.sectionTitle}>Recent Searches</Text>
-          </View>
-          <FlatList
-            data={recentSearches}
-            renderItem={renderRecentSearch}
-            keyExtractor={(item) => item.id}
-            scrollEnabled={false}
-          />
-        </View>
 
     
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 
@@ -313,18 +244,24 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f8f9fa',
+    marginTop: 20
   },
   scrollView: {
     flex: 1,
   },
   heroContainer: {
-    height: 250,
+    height: 200,
     position: 'relative',
+    paddingHorizontal: 20,
+    borderRadius: 16,
+    
+    
   },
   heroSlide: {
     height: 250,
     justifyContent: 'center',
     alignItems: 'center',
+    borderRadius: 16,
   },
   heroOverlay: {
     flex: 1,
@@ -332,6 +269,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 20,
+    
     backgroundColor: 'rgba(0, 0, 0, 0.4)',
   },
   heroTitle: {
@@ -391,21 +329,15 @@ const styles = StyleSheet.create({
   },
   routesList: {
     paddingRight: 20,
+    paddingBottom: 16,
   },
   routeCard: {
     borderRadius: 20,
     marginRight: 16,
     width: 240,
-    height: 180,
+    height: 150,
     overflow: 'hidden',
-    elevation: 8,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 4.65,
+   
   },
   routeBackground: {
     width: '100%',
@@ -420,12 +352,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   routeHeader: {
-    marginBottom: 16,
+    // marginBottom: 16,
   },
   routePoints: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 8,
+    // marginBottom: 8,
   },
   routePoint: {
     width: 10,
@@ -471,7 +403,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   routePrice: {
-    fontSize: 28,
+    fontSize: 20,
     fontFamily: 'Raleway-Bold',
     color: '#fff',
     marginBottom: 4,
