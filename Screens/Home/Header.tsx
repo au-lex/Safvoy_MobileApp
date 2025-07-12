@@ -107,9 +107,11 @@ const Header: React.FC<HeaderProps> = ({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#FFF',
+    // backgroundColor: '#FFF',
     paddingTop: 10,
     paddingBottom: 5,
+    borderBottomWidth: 1,
+    borderBottomColor: '#E5E7EB',
   },
   header: {
     flexDirection: 'row',
@@ -117,6 +119,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 20,
     marginBottom: 15,
+ 
   },
   profileSection: {
     flexDirection: 'row',
